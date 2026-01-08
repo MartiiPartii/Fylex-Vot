@@ -1,0 +1,111 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: martiiparti/fylex-vot-backend:v1
+        ports:
+        - containerPort: 8080
+        env:
+        # Database configuration
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: postgres-password
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: spring_datasource_url
+        # Application configuration
+        - name: SPRING_APPLICATION_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: spring_application_name
+        # JWT configuration
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: jwt_secret
+        - name: EXPIRATIONMS
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: expirationms
+        # OAuth configuration
+        - name: CLIENT_ID_GOOGLE
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: client_id_google
+        - name: GITHUB_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: github_client_id
+        - name: GITHUB_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: github_client_secret
+        # Cloudinary configuration
+        - name: CLOUDINARY_CLOUD_NAME
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: cloudinary_cloud_name
+        - name: CLOUDINARY_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: cloudinary_api_key
+        - name: CLOUDINARY_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: cloudinary_api_secret
+        # CORS configuration
+        - name: ALLOWED_ORIGINS
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: allowed_origins
+        # FastAPI service URL
+        - name: FASTAPI_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: fastapi_url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

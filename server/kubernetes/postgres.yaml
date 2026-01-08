@@ -30,6 +30,11 @@ spec:
             secretKeyRef:
               name: postgres-secret
               key: postgres-password
+        - name: POSTGRES_DB
+          valueFrom:
+            configMapKeyRef:
+              name: postgres-configmap
+              key: database_name
 ---
 apiVersion: v1
 kind: Service

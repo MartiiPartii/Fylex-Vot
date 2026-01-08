@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-configmap
+data:
+  database_name: fylex
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  spring_application_name: server
+  spring_datasource_url: jdbc:postgresql://postgres-service:5432/fylex
+  expirationms: "86400000"
+  client_id_google: 148627039061-bnp746gcr5cnevbdg1meplnq9ta9c3vi.apps.googleusercontent.com
+  allowed_origins: http://frontend-service:3000
+  github_client_id: Ov23liXr1uKP5avzDD0B
+  fastapi_url: http://model-service:8000/ml/service/analysis
