@@ -4,4 +4,4 @@ metadata:
   name: model-config
 data:
   base_url_huggingface: https://api.groq.com/openai/v1
-  cors_allowed_origins: http://backend-service:8080/
+  cors_allowed_origins: http://backend-service:8080
