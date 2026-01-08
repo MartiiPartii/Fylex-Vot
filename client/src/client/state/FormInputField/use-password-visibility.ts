@@ -1,0 +1,23 @@
+"use client"
+
+/**
+ * Password Visibility Hook
+ * 
+ * Manages password field visibility toggle.
+ */
+
+import { useState } from "react";
+
+export function usePasswordVisibility() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(prev => !prev);
+    };
+
+    return {
+        showPassword,
+        togglePasswordVisibility
+    };
+}
+

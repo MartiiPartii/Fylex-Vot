@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.disabled {
+  pointer-events: none;
+  user-select: none;
+  filter: blur(12px);
+}
+
+
+.image {
+  width: 100%;
+}
+
+
+/* HTML: <div class="loader"></div> */
+/* CUBE */
+/* .loader {
+  width: 50px;
+  aspect-ratio: 1;
+  color: #000;
+  border: 2px solid;
+  box-sizing: border-box;
+  background:
+    repeating-conic-gradient(#0000 0 90deg,currentColor 0 180deg),
+    repeating-conic-gradient(currentColor 0 90deg,#0000 0 180deg);
+  background-size: 16px 16px;
+  background-position: 0 0;
+  animation: l7 2s infinite;
+}
+@keyframes l7{
+  100% {background-position: 0px 32px,16px 0px}
+} */
+
+
+/* HTML: <div class="loader"></div> */
+/* REACT */
+/* .loader {
+  width: 100px;
+  height: 42px;
+  border: 2px solid;
+  box-sizing: border-box;
+  border-radius: 50%;
+  display: grid;
+  animation: l2 2s infinite linear;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  border: inherit;
+  border-radius: 50%;
+  animation: inherit;
+  animation-duration: 3s;
+}
+.loader:after {
+  --s:-1;
+}
+@keyframes l2 {
+   100% {transform:rotate(calc(var(--s,1)*1turn))}
+} */
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 120px;
+  height: 20px;
+  background: 
+    linear-gradient(#000 50%,#0000 0),
+    linear-gradient(#0000 50%,#000 0),
+    linear-gradient(#000 50%,#0000 0),
+    linear-gradient(#0000 50%,#000 0),
+    linear-gradient(#000 50%,#0000 0),
+    linear-gradient(#0000 50%,#000 0)
+    #ddd;
+  background-size: calc(100%/6 + 1px) 200%;
+  background-repeat: no-repeat;
+  animation: l12 2s infinite;
+}
+@keyframes l12 {
+  0%     {background-position: calc(0*100%/5) 100%,calc(1*100%/5)   0%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
+  16.67% {background-position: calc(0*100%/5)   0%,calc(1*100%/5)   0%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
+  33.33% {background-position: calc(0*100%/5)   0%,calc(1*100%/5) 100%,calc(2*100%/5) 100%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
+  50%    {background-position: calc(0*100%/5)   0%,calc(1*100%/5) 100%,calc(2*100%/5)   0%,calc(3*100%/5)   0%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
+  66.67% {background-position: calc(0*100%/5)   0%,calc(1*100%/5) 100%,calc(2*100%/5)   0%,calc(3*100%/5) 100%,calc(4*100%/5) 100%,calc(5*100%/5)   0%}
+  83.33% {background-position: calc(0*100%/5)   0%,calc(1*100%/5) 100%,calc(2*100%/5)   0%,calc(3*100%/5) 100%,calc(4*100%/5)   0%,calc(5*100%/5)   0%}
+  100%   {background-position: calc(0*100%/5)   0%,calc(1*100%/5) 100%,calc(2*100%/5)   0%,calc(3*100%/5) 100%,calc(4*100%/5)   0%,calc(5*100%/5) 100%}
+}
