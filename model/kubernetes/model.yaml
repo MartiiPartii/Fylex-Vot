@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: model
+  labels:
+    app: model
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: model
+  template:
+    metadata:
+      labels:
+        app: model
+    spec:
+      containers:
+      - name: model
+        image: martiiparti/fylex-vot-model:v1
+        ports:
+        - containerPort: 8000
+        env:
+        - name: HF_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: model-secret
+              key: hf_token
+        - name: BASE_URL_HUGINGFACE
+          valueFrom:
+            configMapKeyRef:
+              name: model-config
+              key: base_url_huggingface
+        - name: CORS_ALLOWED_ORIGINS
+          valueFrom:
+            configMapKeyRef:
+              name: model-config
+              key: cors_allowed_origins
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: model-service
+spec:
+  selector:
+    app: model
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
