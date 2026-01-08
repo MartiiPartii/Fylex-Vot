@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+data:
+  server_base_url: http://backend-service:8080/api
+  google_client_id: 148627039061-bnp746gcr5cnevbdg1meplnq9ta9c3vi.apps.googleusercontent.com
+  github_client_id: Ov23liXr1uKP5avzDD0B
+  max_file_size: "10"

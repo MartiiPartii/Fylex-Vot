@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: martiiparti/fylex-vot-frontend:v1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: SERVER_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: server_base_url
+        - name: NEXT_PUBLIC_GOOGLE_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: google_client_id
+        - name: NEXT_PUBLIC_MAX_FILE_SIZE
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: max_file_size
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+spec:
+  selector:
+    app: frontend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30000
