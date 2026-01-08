@@ -1,0 +1,53 @@
+# Build outputs
+target/
+*.jar
+*.war
+*.ear
+
+# Environment files (secrets)
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+*.swp
+*.swo
+*~
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files (optional - remove if you want to run tests in Docker)
+src/test/
+
+# Documentation
+*.md
+HELP.md
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
